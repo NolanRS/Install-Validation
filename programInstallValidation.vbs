@@ -52,8 +52,8 @@ End sub
 
 executableExists filePaths
 
-Dim installedPrograms
-Dim ninstalledPrograms
+Dim installedString
+Dim notInstalledString
 Dim spacer
 Dim separator
 Dim downMessage
@@ -67,19 +67,19 @@ Set Shell = CreateObject("Wscript.Shell")
 sub checkInstalls(array)
     for each program in installArray
         if program <> "" then
-            installedPrograms = installedPrograms + vbCrLf + "-" +program
+            installedString = installedString + vbCrLf + "-" +program
         End if
     Next
     for each program in notInstallArray
         if program <> "" then
-            ninstalledPrograms = ninstalledPrograms + vbCrLf+"-" + program
+            notInstalledString = notInstalledString + vbCrLf+"-" + program
             elemNotInstalled = elemNotInstalled+1
         End if
     Next
     if elemNotInstalled = 0 then
-        result=MsgBox( "Installed Programs" & installedPrograms & separator & downMessage,64,"Program Installations")
+        result=MsgBox( "Installed Programs" & installedString & separator & downMessage,64,"Program Installations")
     Else
-        result=MsgBox("Installed Programs" & installedPrograms & separator & "Programs Not Installed" & ninstalledPrograms & separator & downMessage,64,"Program Installations")
+        result=MsgBox("Installed Programs" & installedString & separator & "Programs Not Installed" & notInstalledString & separator & downMessage,64,"Program Installations")
     End if
 
     if result=1 then
